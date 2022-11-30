@@ -36,15 +36,45 @@ List<int> sortedSquares(List<int> nums) {
 }
 
 void merge(List<int> nums1, int m, List<int> nums2, int n) {
-  nums1 = nums1 + nums2;
-  nums1.removeWhere((item) => item == 0);
-  nums1.sort((a, b) => a.compareTo(b));
-}
-void duplicateZeros(List<int> arr) {
-  for(int i=0;i<arr.length;i++){
-    if(arr[i]==0){
-      arr.insert(i, 0);
+  int i = m - 1, j = n - 1;
+  while (i >= 0 && j >= 0) {
+    if (nums1[i] >= nums2[j]) {
+      nums1[i + j + 1] = nums1[i];
+      i--;
+    } else {
+      nums1[i + j + 1] = nums2[j];
+      j--;
     }
-    print(arr);
   }
+  while (j >= 0) {
+    nums1[i + j + 1] = nums2[j];
+    j--;
+  }
+}
+
+void duplicateZeros(List<int> arr) {
+  int zeros = 0;
+  for (int a in arr) {
+    if (a == 0) {
+      ++zeros;
+    }
+  }
+
+  for (int i = arr.length - 1, j = arr.length + zeros - 1; i < j; --i, --j) {
+    if (j < arr.length) {
+      arr[j] = arr[i];
+    }
+    if (arr[i] == 0 && --j < arr.length) {
+      arr[j] = arr[i];
+    }
+  }
+}
+int removeElement(List<int> nums, int val) {
+  int count=0;
+  for(int i=0;i<nums.length;i++){
+    if(nums[i]!=val){
+      count++;
+    }
+  }
+  return count;
 }
