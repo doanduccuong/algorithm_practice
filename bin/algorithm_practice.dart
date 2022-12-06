@@ -21,6 +21,7 @@ void main(List<String> arguments) {
   final r1=TreeNode(4,TreeNode(2,TreeNode(1),TreeNode(3)),TreeNode(7));
   // print(leet_code_practice.addTwoNumbers(l1, l2)?.val);
   // print(leet_code_practice.findMedianSortedArrays([1,2],[3,4]));
-  print(leet_code_practice.searchBST(r1,2)?.val);
+  // print(leet_code_practice.searchBST(r1,2)?.val);
+  print(leet_code_practice.myPow(2.0000,12));
 }
 

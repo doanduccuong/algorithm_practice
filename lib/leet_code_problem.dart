@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:math';
 
 class ListNode {
@@ -12,6 +11,7 @@ class TreeNode {
   int val;
   TreeNode? left;
   TreeNode? right;
+
   TreeNode([this.val = 0, this.left, this.right]);
 }
 
@@ -207,4 +207,73 @@ TreeNode? searchBST(TreeNode? root, int val) {
       return searchBST(root?.left, val);
     }
   }
+}
+
+List<int> getRow(int rowIndex) {
+  List<int> result = [];
+  int pascalTriangle(int a, int b) {
+    {
+      if (b == 0 || b == a) {
+        return 1;
+      } else {
+        return pascalTriangle(a - 1, b - 1) + pascalTriangle(a - 1, b);
+      }
+    }
+  }
+
+  for (int b = 0; b <= rowIndex; b++) {
+    result.add(pascalTriangle(rowIndex, b));
+  }
+  return result;
+}
+
+int fib(int n, {int next = 1, int pre = -1}) {
+  print(next);
+  if (n == 0) {
+    return next + pre;
+  }
+
+  n--;
+  int temp = 0;
+  temp = next;
+  next = next + pre;
+  pre = temp;
+  return fib(n, next: next, pre: pre);
+}
+
+int climbStairs(int n, {int next = 1, int pre = -1, int sum = 0}) {
+  if (n == 0) {
+    print(sum + next + pre);
+    return sum + next + pre;
+  }
+  sum = sum + next + pre;
+  n--;
+  int temp = 0;
+  temp = next;
+  next = next + pre;
+  pre = temp;
+  return climbStairs(n, next: next, pre: pre, sum: sum);
+}
+
+int maxDepth(TreeNode? room) {
+  if (room == null) {
+    return 0;
+  } else {
+    int lDepth = maxDepth(room.left);
+    int rDepth = maxDepth(room.right);
+    print(lDepth);
+    print(rDepth);
+
+    if (lDepth > rDepth) {
+      return (lDepth + 1);
+    } else {
+      return (rDepth + 1);
+    }
+  }
+}
+
+double myPow(double x, int n) {
+  n--;
+  if (n == 0) return x;
+  return x * myPow(x, n);
 }
